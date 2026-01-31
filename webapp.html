@@ -25,6 +25,14 @@
     .btn:hover { background: rgba(255,255,255,0.3); }
     .section { margin: 25px 0; }
     .header { font-size: 20px; margin: 20px 0 15px; }
+    #status { 
+      text-align: center; 
+      margin-top: 20px; 
+      padding: 12px; 
+      background: rgba(0,0,0,0.2); 
+      border-radius: 8px; 
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -51,14 +59,27 @@
       <button class="btn" onclick="send('show_promocodes')">🎁 Промокоды</button>
       <button class="btn" onclick="send('show_notifications')">🔔 Уведомления</button>
     </div>
+
+    <div id="status"></div>
   </div>
 
   <script>
     Telegram.WebApp.ready();
-    
+    Telegram.WebApp.MainButton.hide();
+
     function send(action) {
+      // Показываем статус
+      const status = document.getElementById('status');
+      status.textContent = "⏳ Отправка...";
+      status.style.display = "block";
+      
+      // Отправляем данные
       Telegram.WebApp.sendData(JSON.stringify({ action: action }));
-      Telegram.WebApp.close();
+      
+      // Через 2 секунды скрываем статус (бот ответит в чате)
+      setTimeout(() => {
+        status.textContent = "✅ Данные отправлены! Результат пришлют в чат.";
+      }, 1500);
     }
   </script>
 </body>
