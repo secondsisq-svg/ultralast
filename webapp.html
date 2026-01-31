@@ -32,7 +32,7 @@
     <h1>🌙 TSUKI VPN</h1>
 
     <div class="section">
-      <div class="header">Действия</div>
+      <div class="header">Профиль и конфиги</div>
       <button class="btn" onclick="send('get_profile')">👤 Профиль</button>
       <button class="btn" onclick="send('get_configs')">📱 Мои конфиги</button>
       <button class="btn" onclick="send('buy_vpn')">🛒 Купить VPN</button>
@@ -58,7 +58,7 @@
     
     function send(action) {
       Telegram.WebApp.sendData(JSON.stringify({ action: action }));
-      Telegram.WebApp.close(); // закрываем WebApp после отправки
+      Telegram.WebApp.close();
     }
   </script>
 </body>
